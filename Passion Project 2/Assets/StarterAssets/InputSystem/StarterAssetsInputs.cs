@@ -12,6 +12,10 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
+		public bool aim;
+		public bool shoot;
+		public bool reload;
+		public bool heal;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -43,10 +47,30 @@ namespace StarterAssets
 		{
 			SprintInput(value.isPressed);
 		}
+
+        public void OnAim(InputValue value)
+        {
+            AimInput(value.isPressed);
+        }
+
+		public void OnShoot(InputValue value)
+		{
+			ShootInput(value.isPressed);
+		}
+
+        public void OnReload(InputValue value)
+        {
+			ReloadInput(value.isPressed);
+        }
+
+		public void OnHeal(InputValue value)
+		{
+			HealInput(value.isPressed);
+		}
 #endif
 
 
-		public void MoveInput(Vector2 newMoveDirection)
+        public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
 		} 
@@ -64,6 +88,26 @@ namespace StarterAssets
 		public void SprintInput(bool newSprintState)
 		{
 			sprint = newSprintState;
+		}
+
+		public void AimInput(bool newAimState)
+		{
+			aim = newAimState;
+		}
+
+		public void ShootInput(bool newShootState)
+		{
+			shoot = newShootState;
+		}
+
+		public void ReloadInput(bool newReloadState)
+		{
+			reload = newReloadState;
+		}
+
+		public void HealInput(bool newHealState)
+		{
+			heal = newHealState;
 		}
 		
 		private void OnApplicationFocus(bool hasFocus)

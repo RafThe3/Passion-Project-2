@@ -5,12 +5,11 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEditor;
 using UnityEditor.Profiling;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private bool lockCursor = false;
-    private int fps = 0;
-    private int fpsMode = 0;
 
     private void Start()
     {
@@ -92,68 +91,10 @@ public class GameManager : MonoBehaviour
         Camera.main.GetComponent<AudioSource>().PlayOneShot(audioClip);
     }
 
-    public void ChangeMaxFPS(TextMeshProUGUI fpsText)
+    public void ChangeBrightness(Slider brightness)
     {
-        fpsText.text = $"{fps} FPS";
-        Application.targetFrameRate = fps;
+        Screen.brightness = brightness.value;
     }
-
-    public void MaxFPS(int increment)
-    {
-        fpsMode += increment;
-
-        if (fpsMode == 1)
-        {
-            fps = 30;
-        }
-        else if (fpsMode == 2)
-        {
-            fps = 60;
-        }
-        else if (fpsMode == 3)
-        {
-            fps = 120;
-        }
-        else if (fpsMode == 4)
-        {
-            fps = 144;
-        }
-        else if (fpsMode == 5)
-        {
-            fps = 165;
-        }
-        else if (fpsMode == 6)
-        {
-            fps= 180;
-        }
-        else if (fpsMode == 7)
-        {
-            fps = 200;
-        }
-        else if (fpsMode == 8)
-        {
-            fps = 240;
-        }
-        else if (fpsMode == 9)
-        {
-            fps = 360;
-        }
-        else
-        {
-            fps = 0;
-        }
-
-        if (fpsMode > 9)
-        {
-            fpsMode = 9;
-        }
-
-        if (fpsMode < 0)
-        {
-            fpsMode = 0;
-        }
-    }
-
 
     /*
     public void SavePlayerProgress()

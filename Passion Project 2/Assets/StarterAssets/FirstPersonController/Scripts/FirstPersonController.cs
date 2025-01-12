@@ -60,6 +60,10 @@ namespace StarterAssets
 		private float _verticalVelocity;
 		private float _terminalVelocity = 53.0f;
 
+		[HideInInspector] public float _tempSprintSpeed;
+		[HideInInspector] public float _tempRotationSpeed;
+		[HideInInspector] public bool _isSprinting;
+
 		// timeout deltatime
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
@@ -72,7 +76,7 @@ namespace StarterAssets
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
 
-		private const float _threshold = 0.01f;
+		private const float _threshold = 0.001f;
 
 		private bool IsCurrentDeviceMouse
 		{
@@ -108,6 +112,9 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+
+			_tempSprintSpeed = SprintSpeed;
+			_tempRotationSpeed = RotationSpeed;
 		}
 
 		private void Update()
@@ -115,6 +122,8 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			_isSprinting = _input.sprint;
+			RotationSpeed = Time.deltaTime == 0 ? 0 : _tempRotationSpeed;
 		}
 
 		private void LateUpdate()
