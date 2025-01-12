@@ -16,6 +16,7 @@ namespace StarterAssets
 		public bool shoot;
 		public bool reload;
 		public bool heal;
+		public bool pause;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -67,6 +68,11 @@ namespace StarterAssets
 		{
 			HealInput(value.isPressed);
 		}
+
+        public void OnPause(InputValue value)
+        {
+            PauseInput(value.isPressed);
+        }
 #endif
 
 
@@ -108,6 +114,11 @@ namespace StarterAssets
 		public void HealInput(bool newHealState)
 		{
 			heal = newHealState;
+		}
+
+		private void PauseInput(bool newPauseState)
+		{
+			pause = newPauseState;
 		}
 		
 		private void OnApplicationFocus(bool hasFocus)

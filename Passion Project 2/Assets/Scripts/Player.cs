@@ -13,9 +13,6 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private bool testControls = false;
 
-    [Header("Mechanics")]
-    [SerializeField] private StarterAssetsInputs playerInput;
-
     [Header("Movement")]
     [SerializeField] private bool infiniteStamina = false;
     [Min(0), SerializeField] private float sprintTime = 1;
@@ -68,7 +65,6 @@ public class Player : MonoBehaviour
         character = GetComponent<CharacterController>();
         controller = GetComponent<FirstPersonController>();
         audioSource = Camera.main.GetComponent<AudioSource>();
-        playerInput = GetComponent<StarterAssetsInputs>();
     }
 
     private void Start()
@@ -124,7 +120,7 @@ public class Player : MonoBehaviour
             GetComponent<SaveSystem>().Load();
         }
 
-        if (Input.GetButtonDown("Heal"))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Heal(10);
         }
