@@ -29,6 +29,8 @@ public class Debugging : MonoBehaviour
             time -= pollingTime;
             frameCount = 0;
         }
+
+        //QualitySettings.vSyncCount = 1;
     }
 
     public void ShowFPS(Toggle toggle)
