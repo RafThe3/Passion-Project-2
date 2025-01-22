@@ -6,9 +6,11 @@ using TMPro;
 
 public class ItemSwitch : MonoBehaviour
 {
+    [SerializeField] private bool canSwitch = true;
     [SerializeField] private GameObject item1, item2;
     [Min(0), SerializeField] private float switchCooldown = 1;
-    [SerializeField] private TextMeshProUGUI gunNameText;
+    [SerializeField] private TextMeshProUGUI itemNameText;
+    [SerializeField] private TextMeshProUGUI gunAmmoText;
 
     private bool hasSwitched = false;
     private float cameraDefaultFOV;
@@ -17,12 +19,17 @@ public class ItemSwitch : MonoBehaviour
     {
         item2.SetActive(false);
         item1.SetActive(true);
-        gunNameText.text = item1.name;
+        itemNameText.text = item1.name;
         cameraDefaultFOV = Camera.main.fieldOfView;
     }
 
     private void Update()
     {
+        if (!canSwitch)
+        {
+            return;
+        }
+
         bool switchedItem = Mathf.Abs(Input.mouseScrollDelta.y) > Mathf.Epsilon;
 
         if (switchedItem
@@ -44,13 +51,17 @@ public class ItemSwitch : MonoBehaviour
         {
             item1.SetActive(false);
             item2.SetActive(true);
-            gunNameText.text = item2.name;
+            itemNameText.text = item2.name;
+
+            gunAmmoText.enabled = item2.GetComponent<Shooting>();
         }
         else if (item2.activeSelf)
         {
             item2.SetActive(false);
             item1.SetActive(true);
-            gunNameText.text = item1.name;
+            itemNameText.text = item1.name;
+
+            gunAmmoText.enabled = item1.GetComponent<Shooting>();
         }
 
         yield return new WaitForSeconds(cooldown);
